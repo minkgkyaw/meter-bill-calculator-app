@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     zIndex: 4,
-    backgroundColor: '#bdc3c7',
+    backgroundColor: '#fefaf4',
   },
   appBar: {
     backgroundColor: '#ffb142',
@@ -51,6 +51,10 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     width: `${windowWidth / 4.2}%`,
     height: 90,
+  },
+  flatListContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-evenly',
   },
   item: {
     width: '100%',
