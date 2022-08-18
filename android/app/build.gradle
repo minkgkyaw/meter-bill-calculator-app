@@ -240,10 +240,9 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-//             signingConfig signingConfigs.release
         }
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             shrinkResources true
             // resConfigs "en"
             minifyEnabled enableProguardInReleaseBuilds

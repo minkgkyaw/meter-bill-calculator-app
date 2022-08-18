@@ -8,8 +8,6 @@ export const finAndCalculateDifferentUsedUnit = (
 ) => {
   const units = Math.abs(curUnit - prevUnit);
 
-  console.log(units);
-
   return type === 'Home'
     ? homeUnitCalculation(units)
     : factoryUnitCalculation(units);

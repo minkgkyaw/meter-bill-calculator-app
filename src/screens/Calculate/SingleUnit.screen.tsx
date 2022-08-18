@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {FC, PropsWithChildren, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {Keyboard, SafeAreaView, View} from 'react-native';
@@ -6,7 +7,6 @@ import {
   Card,
   TextInput,
   Button,
-  HelperText,
   RadioButton,
   Checkbox,
   Caption,
@@ -58,12 +58,26 @@ const CalculateSingleUnitScreen: FC<PropsWithChildren<{}>> = () => {
           validationSchema={singleUnitInput}
           initialValues={initialValues}
           onSubmit={onSubmit}>
-          {({handleBlur, handleChange, handleSubmit, errors, values}) => {
+          {({
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+            values,
+            isValid,
+            dirty,
+          }) => {
             return (
               <Card style={styled.card}>
                 <Card.Content style={styled.cardContent}>
                   <TextInput
-                    // autoFocus
+                    right={
+                      <TextInput.Icon
+                        name="backspace"
+                        color="#4B4B4B"
+                        onPress={() => setFieldValue('units', '')}
+                      />
+                    }
                     mode={'outlined'}
                     onChangeText={handleChange('units')}
                     defaultValue={values.units}
@@ -71,13 +85,9 @@ const CalculateSingleUnitScreen: FC<PropsWithChildren<{}>> = () => {
                     label={strings.inputLabel}
                     value={values.units}
                     onBlur={handleBlur('unit')}
-                    error={!!errors.units}
                     outlineColor={'black'}
                     activeOutlineColor={'#ffda79'}
                   />
-                  <HelperText type="error" visible={!!errors.units}>
-                    {errors.units}
-                  </HelperText>
                 </Card.Content>
                 <Card.Content style={styled.cardContent}>
                   <RadioButton.Group
@@ -119,6 +129,7 @@ const CalculateSingleUnitScreen: FC<PropsWithChildren<{}>> = () => {
                 </Card.Content>
                 <Card.Content style={styled.cardContent}>
                   <Button
+                    disabled={!dirty || !isValid}
                     mode={'contained'}
                     color={'#ffda79'}
                     onPress={handleSubmit}

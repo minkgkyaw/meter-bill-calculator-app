@@ -21,7 +21,7 @@ const ShowDetailScreen: FC<PropsWithChildren<DetailScreenProps>> = ({
   route,
   navigation,
 }) => {
-  const {units, type, maintenance} = route.params;
+  const {units, type, maintenance, options} = route.params;
 
   const [prices, setPrices] = useState<number>(0);
   const [totalPrices, setTotalPrices] = useState<number>(0);
@@ -70,6 +70,19 @@ const ShowDetailScreen: FC<PropsWithChildren<DetailScreenProps>> = ({
             />
             <Divider />
             <Card.Content>
+              {options?.prevUnits && (
+                <ListDataItem
+                  left={strings.labelInput1}
+                  right={`${convertToMyanmar(String(options.prevUnits))} ယူနစ်`}
+                />
+              )}
+              {/* <Card.Content> */}
+              {options?.currUnits && (
+                <ListDataItem
+                  left={strings.labelInput2}
+                  right={`${convertToMyanmar(String(options.currUnits))} ယူနစ်`}
+                />
+              )}
               <ListDataItem
                 left={strings.detailScreenUnitLabel}
                 right={`${convertToMyanmar(String(units))} ယူနစ်`}

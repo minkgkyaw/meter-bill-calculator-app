@@ -30,6 +30,9 @@ export const strings = new LocalizedStrings({
     tableTitle3: 'သုံးစွဲ ယူနစ်',
     tableTitle4: 'ကျသင့်ငွေ',
     total: 'စုစုပေါင်း ကျသင့်ငွေ (ကျပ်)',
+    labelInput1: 'ယခင် သုံးစွဲခဲ့သည့် ယူနစ်',
+    labelInput2: 'ယခု သုံးစွဲ ယူနစ်',
+    pricesLabel: 'စျေးနှုန်းများ',
   },
 });
 
