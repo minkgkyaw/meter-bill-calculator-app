@@ -22,6 +22,14 @@ export const strings = new LocalizedStrings({
     detailScreenMaintenanceLabel: 'မီတာ ထိန်းသိမ်းခ',
     detailScreenTotalPricesLabel: 'ကျသင့်ငွေ စုစုပေါင်း',
     submitBtn: 'တွက်မည်',
+    detailTitle: 'အသေးစိတ်',
+    detailCardTitle: 'တွက်ချက်မှု စာရင်း',
+    detailCardTitle2: 'အသေးစိတ် တွက်ချက်မှု စာရင်းဇယား',
+    tableTitle1: 'ယူနစ်အလွှာ',
+    tableTitle2: 'နှုံးထား',
+    tableTitle3: 'သုံးစွဲ ယူနစ်',
+    tableTitle4: 'ကျသင့်ငွေ',
+    total: 'စုစုပေါင်း ကျသင့်ငွေ (ကျပ်)',
   },
 });
 

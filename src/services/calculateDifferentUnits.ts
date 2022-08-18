@@ -1,4 +1,4 @@
-import {homeUnitCalculation} from './caclulateHomeUnits';
+import {homeUnitCalculation} from './calculateHomeUnits';
 import {factoryUnitCalculation} from './calculateFactoryUnits';
 
 export const finAndCalculateDifferentUsedUnit = (

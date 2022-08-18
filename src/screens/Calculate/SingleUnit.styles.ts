@@ -39,12 +39,12 @@ export const styled = StyleSheet.create({
   meterTypeGroup: {
     marginVertical: 5,
     position: 'relative',
-    zIndex: 2,
+    borderWidth: 1,
+    paddingVertical: 4,
+    borderRadius: 4,
   },
   meterBtnGroup: {
     display: 'flex',
-    borderWidth: 1,
-    borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#F6F6F6',

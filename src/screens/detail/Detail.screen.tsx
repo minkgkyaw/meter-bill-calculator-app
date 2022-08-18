@@ -1,11 +1,21 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {Appbar, Card, Divider, Paragraph, Subheading} from 'react-native-paper';
 import {DetailScreenProps} from '../../types/navigator.types';
-import {homeUnitCalculation} from '../../services/caclulateHomeUnits';
+import {homeUnitCalculation} from '../../services/calculateHomeUnits';
 import {factoryUnitCalculation} from '../../services/calculateFactoryUnits';
-import {convertToMyanmar} from '../../services/conveter';
+import {convertToMyanmar} from '../../services/converter';
 import {strings} from '../../i18n';
+import {styled} from './Detail.style';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import DataTableComponent from '../../components/DataTable';
+
+const ListDataItem = ({left, right}: {left: string; right: string}) => (
+  <View style={styled.listDataItem}>
+    <Paragraph>{left}</Paragraph>
+    <Subheading style={styled.subHeader}>{right}</Subheading>
+  </View>
+);
 
 const ShowDetailScreen: FC<PropsWithChildren<DetailScreenProps>> = ({
   route,
@@ -34,8 +44,8 @@ const ShowDetailScreen: FC<PropsWithChildren<DetailScreenProps>> = ({
     calc();
   }, [units, type, maintenance, prices]);
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
-      <Appbar.Header>
+    <SafeAreaView style={styled.container}>
+      <Appbar.Header style={styled.appBar}>
         <Appbar.BackAction
           color={'white'}
           onPress={() => {
@@ -43,75 +53,55 @@ const ShowDetailScreen: FC<PropsWithChildren<DetailScreenProps>> = ({
           }}
         />
         <Appbar.Content
-          title={strings.singUnitScreenTitle}
-          // titleStyle={styled.appBarTitle}
+          title={strings.detailTitle}
+          titleStyle={styled.appBarTitle}
         />
       </Appbar.Header>
-      <Card style={{width: 350, marginVertical: 30}}>
-        <Card.Title
-          title={'တွက်ချက်မှု စာရင်း'}
-          subtitle={
-            type === 'Home'
-              ? 'အိမ်သုံးမီတာ အမျိုးအစား'
-              : 'လုပ်ငန်းသုံးမီတာ အမျိုးအစား'
-          }
-        />
-        <Divider />
-        <Card.Content>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Paragraph>{strings.detailScreenUnitLabel}</Paragraph>
-            <Subheading style={{fontWeight: 'bold'}}>{`${convertToMyanmar(
-              String(units),
-            )} ယူနစ်`}</Subheading>
-          </View>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Paragraph>{strings.detailScreenPricesLabel}</Paragraph>
-            <Subheading style={{fontWeight: 'bold'}}>{`${convertToMyanmar(
-              String(prices),
-            )} ကျပ်`}</Subheading>
-          </View>
+      <ScrollView>
+        <View style={styled.body}>
+          <Card style={styled.card}>
+            <Card.Title
+              title={strings.detailCardTitle}
+              subtitle={
+                type === 'Home'
+                  ? 'အိမ်သုံးမီတာ အမျိုးအစား'
+                  : 'လုပ်ငန်းသုံးမီတာ အမျိုးအစား'
+              }
+            />
+            <Divider />
+            <Card.Content>
+              <ListDataItem
+                left={strings.detailScreenUnitLabel}
+                right={`${convertToMyanmar(String(units))} ယူနစ်`}
+              />
+              <ListDataItem
+                left={strings.detailScreenPricesLabel}
+                right={`${convertToMyanmar(String(prices))} ကျပ်`}
+              />
+              {maintenance && (
+                <ListDataItem
+                  left={strings.detailScreenMaintenanceLabel}
+                  right={`${convertToMyanmar(String(500))} ကျပ်`}
+                />
+              )}
+              <Divider style={{marginTop: 3}} />
+              <ListDataItem
+                left={strings.detailScreenTotalPricesLabel}
+                right={`${convertToMyanmar(String(totalPrices))} ကျပ်`}
+              />
+            </Card.Content>
+          </Card>
 
-          {maintenance && (
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <Paragraph>{strings.detailScreenMaintenanceLabel}</Paragraph>
-              <Subheading style={{fontWeight: 'bold'}}>{`${convertToMyanmar(
-                String(500),
-              )} ကျပ်`}</Subheading>
-            </View>
-          )}
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Paragraph>{strings.detailScreenTotalPricesLabel}</Paragraph>
-            <Subheading style={{fontWeight: 'bold'}}>{`${convertToMyanmar(
-              String(totalPrices),
-            )} ကျပ်`}</Subheading>
-          </View>
-        </Card.Content>
-      </Card>
-    </View>
+          {/* detail excel */}
+          <DataTableComponent
+            totalPrices={totalPrices}
+            totalUnits={units}
+            maintenance={maintenance}
+            type={type}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

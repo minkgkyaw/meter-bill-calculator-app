@@ -73,7 +73,7 @@ const CalculateSingleUnitScreen: FC<PropsWithChildren<{}>> = () => {
                     onBlur={handleBlur('unit')}
                     error={!!errors.units}
                     outlineColor={'black'}
-                    activeOutlineColor={'#ffb142'}
+                    activeOutlineColor={'#ffda79'}
                   />
                   <HelperText type="error" visible={!!errors.units}>
                     {errors.units}
@@ -86,12 +86,14 @@ const CalculateSingleUnitScreen: FC<PropsWithChildren<{}>> = () => {
                     <View style={styled.meterTypeGroup}>
                       <View style={styled.meterBtnGroup}>
                         <RadioButton.Item
+                          labelStyle={{overflow: 'hidden'}}
                           label={strings.homeTypeMeter}
                           value="Home"
                           color={'#ffda79'}
                         />
 
                         <RadioButton.Item
+                          labelStyle={{overflow: 'hidden'}}
                           label={strings.factoryTypeMeter}
                           value="Factory"
                           color={'#ffda79'}
